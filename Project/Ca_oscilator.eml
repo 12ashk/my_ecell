@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<eml>
+<stepper class="ODEStepper" id="DE"/>
+<system class="System" id="/">
+<property name="StepperID">
+<value>DE</value>
+</property>
+<variable class="Variable" id="SIZE">
+<property name="Value">
+<value>1.0</value>
+</property>
+</variable>
+<variable class="Variable" id="Z">
+<property name="Value">
+<value>1.6</value>
+</property>
+</variable>
+<variable class="Variable" id="Y">
+<property name="Value">
+<value>0.3</value>
+</property>
+</variable>
+<process class="ExpressionFluxProcess" id="v0">
+<property name="k">
+<value>1.0</value>
+</property>
+<property name="Expression">
+<value>k</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>+1</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="v1">
+<property name="k">
+<value>7.3</value>
+</property>
+<property name="beta">
+<value>0.7</value>
+</property>
+<property name="Expression">
+<value>beta*k</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>+1</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="v2">
+<property name="Vm2">
+<value>65.0</value>
+</property>
+<property name="K2">
+<value>1.0</value>
+</property>
+<property name="n">
+<value>2</value>
+</property>
+<property name="Expression">
+<value>Vm2*pow(Z1.Value, n)/(pow(K2, n) + pow(Z1.Value, n))</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>-1</value>
+</value>
+<value>
+<value>Y1</value>
+<value>:.:Y</value>
+<value>+1</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="v3">
+<property name="Vm3">
+<value>500.0</value>
+</property>
+<property name="Kr">
+<value>2.0</value>
+</property>
+<property name="Ka">
+<value>0.9</value>
+</property>
+<property name="m">
+<value>2</value>
+</property>
+<property name="p">
+<value>4</value>
+</property>
+<property name="Expression">
+<value>Vm3*pow(Y1.Value, m) * pow(Z1.Value, p)/((pow(Kr, m) + pow(Y1.Value, m))*(pow(Ka, p) + pow(Z1.Value, p)))</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>+1</value>
+</value>
+<value>
+<value>Y1</value>
+<value>:.:Y</value>
+<value>-1</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="v4">
+<property name="kf">
+<value>1.0</value>
+</property>
+<property name="Expression">
+<value>kf*Y1.Value</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>+1</value>
+</value>
+<value>
+<value>Y1</value>
+<value>:.:Y</value>
+<value>-1</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="v5">
+<property name="k">
+<value>10.0</value>
+</property>
+<property name="Expression">
+<value>k*Z1.Value</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>Z1</value>
+<value>:.:Z</value>
+<value>-1</value>
+</value>
+</property>
+</process>
+</system>
+</eml>

@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<eml>
+<stepper class="ODEStepper" id="DE"/>
+<system class="System" id="/">
+<property name="StepperID">
+<value>DE</value>
+</property>
+<variable class="Variable" id="SIZE">
+<property name="Value">
+<value>1.0</value>
+</property>
+</variable>
+<variable class="Variable" id="cyclin">
+<property name="Value">
+<value>0.01</value>
+</property>
+</variable>
+<variable class="Variable" id="cdc2">
+<property name="Value">
+<value>0.01</value>
+</property>
+</variable>
+<variable class="Variable" id="cp">
+<property name="Value">
+<value>0.01</value>
+</property>
+</variable>
+<process class="ExpressionFluxProcess" id="dcdt">
+<property name="vi">
+<value>0.023</value>
+</property>
+<property name="vd">
+<value>0.1</value>
+</property>
+<property name="Kd">
+<value>0.02</value>
+</property>
+<property name="kd">
+<value>0.00333</value>
+</property>
+<property name="Expression">
+<value>vi - vd*X.Value*C.Value/(Kd+C.Value) - kd*C.Value</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>C</value>
+<value>:.:cyclin</value>
+<value>+1</value>
+</value>
+<value>
+<value>X</value>
+<value>:.:cp</value>
+<value>0</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="dMdt">
+<property name="Kc">
+<value>0.3</value>
+</property>
+<property name="Vm_one">
+<value>0.5</value>
+</property>
+<property name="K_one">
+<value>0.1</value>
+</property>
+<property name="V_two">
+<value>0.167</value>
+</property>
+<property name="K_two">
+<value>0.1</value>
+</property>
+<property name="Expression">
+<value>C.Value*Vm_one*(1-M.Value)/((Kc+C.Value)*(K_one+(1-M.Value))) - V_two*M.Value/(K_two+M.Value)</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>M</value>
+<value>:.:cdc2</value>
+<value>+1</value>
+</value>
+<value>
+<value>C</value>
+<value>:.:cyclin</value>
+<value>0</value>
+</value>
+</property>
+</process>
+<process class="ExpressionFluxProcess" id="dXdt">
+<property name="Vm_three">
+<value>0.2</value>
+</property>
+<property name="K_three">
+<value>0.1</value>
+</property>
+<property name="V_four">
+<value>0.1</value>
+</property>
+<property name="K_four">
+<value>0.1</value>
+</property>
+<property name="Expression">
+<value>M.Value*Vm_three*(1-X.Value)/(K_three+(1-X.Value)) - V_four*X.Value/(K_four+X.Value)</value>
+</property>
+<property name="VariableReferenceList">
+<value>
+<value>X</value>
+<value>:.:cp</value>
+<value>+1</value>
+</value>
+<value>
+<value>M</value>
+<value>:.:cdc2</value>
+<value>0</value>
+</value>
+</property>
+</process>
+</system>
+</eml>
